@@ -46,12 +46,10 @@
 
 </head>
 <body>
-<!--<div style="text-align: center; position: absolute">-->
 <h1 id="heading">Will you be my Valentine?</h1>
 
 <button id="yesBtn">Yes</button>
 <button id="noBtn" style="position: absolute;">No</button>
-<!--</div>-->
 
 <script type='text/javascript'>
     const yesBtn = document.getElementById("yesBtn")
@@ -72,24 +70,22 @@
         document.body.append(imgElem);
     }
 
-    const moveX = 10
+    const moveX = 10 // jump amount 
     const moveY = 10
-    const btnCoords = noBtn.getBoundingClientRect()
-    const originalX = btnCoords.x
-    const originalY = btnCoords.y
+    const originalBtnCoords = noBtn.getBoundingClientRect()
 
-    let curX = btnCoords.x
-    let curY = btnCoords.y
+    let curX = originalBtnCoords.x
+    let curY = originalBtnCoords.y
 
     noBtn.onmousemove = function (event) {
-        curX += event.clientX < curX + btnCoords.width / 2 ? moveX : -moveX
-        curY += event.clientY < curY + btnCoords.height / 2 ? moveY : -moveY
+        curX += event.clientX < curX + originalBtnCoords.width / 2 ? moveX : -moveX
+        curY += event.clientY < curY + originalBtnCoords.height / 2 ? moveY : -moveY
 
         if (curY < 0 || curY > window.innerHeight) {
-            curY = originalY
+            curY = originalBtnCoords.y
         }
         if (curX < 0 || curX > window.innerWidth) {
-            curX = originalX
+            curX = originalBtnCoords.x
         }
         noBtn.style.left = curX + 'px'
         noBtn.style.top = curY + 'px'
