@@ -72,25 +72,33 @@
 
     const moveX = 10 // jump amount 
     const moveY = 10
-    const originalBtnCoords = noBtn.getBoundingClientRect()
-
-    let curX = originalBtnCoords.x
-    let curY = originalBtnCoords.y
 
     noBtn.onmousemove = function (event) {
-        curX += event.clientX < curX + originalBtnCoords.width / 2 ? moveX : -moveX
-        curY += event.clientY < curY + originalBtnCoords.height / 2 ? moveY : -moveY
+        let btnCoords = noBtn.getBoundingClientRect()
+
+        let curX = btnCoords.x
+        let curY = btnCoords.y
+
+        curX += event.clientX < curX + btnCoords.width / 2 ? moveX : -moveX
+        curY += event.clientY < curY + btnCoords.height / 2 ? moveY : -moveY
 
         if (curY < 0 || curY > window.innerHeight) {
-            curY = originalBtnCoords.y
+            curY = btnCoords.y
         }
         if (curX < 0 || curX > window.innerWidth) {
-            curX = originalBtnCoords.x
+            curX = btnCoords.x
         }
+
         noBtn.style.left = curX + 'px'
         noBtn.style.top = curY + 'px'
     }
 
+    noBtn.onclick = function (event) {
+        noBtn.innerText = "Yes"
+        noBtn.onclick = yesBtn.onclick
+        noBtn.onmousemove = null
+    }
+    
 </script>
 
 </body>
